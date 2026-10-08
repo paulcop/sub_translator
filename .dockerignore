@@ -1,0 +1,12 @@
+**/__pycache__
+*.pyc
+.venv
+venv
+*.mkv
+*.mp4
+*.srt
+*.ass
+*.json
+.git
+.claude
+README.md

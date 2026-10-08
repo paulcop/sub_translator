@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sous-titres</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2316140f'/><rect x='7' y='20' width='18' height='3' rx='1.5' fill='%23f2c230'/><rect x='10' y='25' width='12' height='3' rx='1.5' fill='%23f2c230'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <span class="mark">Sous<span class="dash">—</span>titres</span>
+    <span class="meta">traduction de sous-titres · rien n’est conservé</span>
+  </header>
+
+  <main>
+    <h1>Vos sous-titres,<br><em>dans une autre langue.</em></h1>
+    <p class="lede">Déposez un film (MKV, MP4) ou un fichier de sous-titres. Les pistes sont extraites, traduites réplique par réplique, et le minutage d’origine est conservé.</p>
+
+    <!-- L'écran : sert de zone de dépôt puis d'aperçu pendant la traduction -->
+    <section class="screen" id="screen" tabindex="0" aria-label="Déposer un fichier">
+      <input type="file" id="file" accept=".mkv,.mk3d,.webm,.mp4,.m4v,.mov,.avi,.ts,.srt,.ass,.ssa,.vtt,.sub" hidden>
+      <div class="screen-top">
+        <span class="tc" id="tc-left">00:00:00,000</span>
+        <span class="tc" id="tc-right">MKV · MP4 · SRT · ASS · VTT</span>
+      </div>
+      <div class="caption">
+        <p class="caption-src" id="cap-src"></p>
+        <p class="caption-main" id="cap-main">Glissez un fichier ici, ou <u>cliquez pour parcourir</u>.</p>
+      </div>
+    </section>
+
+    <!-- Barre de progression façon timeline -->
+    <div class="timeline" id="timeline" hidden>
+      <div class="track"><div class="fill" id="fill"></div><div class="head" id="head"></div></div>
+      <div class="timeline-meta">
+        <span id="tl-label">Envoi</span>
+        <span id="tl-stats"></span>
+      </div>
+    </div>
+
+    <p class="alert" id="alert" role="alert" hidden></p>
+
+    <!-- Réglages -->
+    <section class="panel" id="settings" hidden>
+      <div class="file-line">
+        <span class="file-name" id="file-name"></span>
+        <button class="link" id="change">Changer de fichier</button>
+      </div>
+
+      <fieldset id="tracks-field">
+        <legend>Piste à traduire</legend>
+        <div class="tracks" id="tracks"></div>
+      </fieldset>
+
+      <div class="row">
+        <label class="field">
+          <span>Langue d’origine</span>
+          <select id="source"></select>
+        </label>
+        <span class="arrow" aria-hidden="true">→</span>
+        <label class="field">
+          <span>Traduire en</span>
+          <select id="target"></select>
+        </label>
+      </div>
+
+      <label class="check">
+        <input type="checkbox" id="sdh" checked>
+        <span class="box" aria-hidden="true"></span>
+        <span>Retirer les descriptions pour malentendants <small>(musique, bruits, noms des personnages)</small></span>
+      </label>
+
+      <button class="primary" id="go">Traduire</button>
+    </section>
+
+    <!-- Traduction en cours -->
+    <section class="panel" id="working" hidden>
+      <button class="secondary" id="cancel">Annuler</button>
+    </section>
+
+    <!-- Terminé -->
+    <section class="panel done" id="done" hidden>
+      <p class="done-line" id="done-line"></p>
+      <div class="actions">
+        <a class="primary" id="download" href="#">Télécharger</a>
+        <button class="secondary" id="again">Traduire un autre fichier</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Les fichiers sont traités en mémoire puis oubliés : la vidéo n’est jamais enregistrée, les sous-titres sont effacés au bout de 30 minutes.
+    La traduction passe par <span id="provider">Google Traduction</span>.
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
